@@ -11,13 +11,14 @@ class unitest(unittest.TestCase):
         self.assertEqual(Solution().maxArea(h),ans);
 class Solution():
     def maxArea(self, height):
-        if len(height) < 2:
-            return 0
         Ans = 0
-        for i in range(len(height)):
-            for j in range(i+1,len(height)):
-                tmp = min(height[i],height[j]) * (j-i)
-                Ans = max(Ans,tmp)
+        i , j = 0, len(height) - 1
+        while i < j:
+            Ans = max(Ans,min(height[i],height[j]) * (j - i))
+            if height[i] < height[j]:
+                i += 1
+            else:
+                j -= 1
         return Ans
 
 if __name__ == '__main__':
